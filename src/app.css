@@ -1,2 +1,30 @@
 @import 'tailwindcss';
-@plugin '@tailwindcss/typography';
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1, h2, h3, .poppins {
+    font-family: "Poppins", sans-serif;
+}
+
+.share-tech-mono {
+    font-family: "Share Tech Mono", sans-serif;
+}
+
+.teko {
+    font-family: "Teko", sans-serif;
+}
+
+.dot-gothic {
+    font-family: "DotGothic16", sans-serif;
+}
+
+span {
+    font-family: inherit;
+    font-weight: inherit;
+}
