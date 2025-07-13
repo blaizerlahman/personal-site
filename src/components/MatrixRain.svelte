@@ -10,9 +10,9 @@
       'JAVA', 'GOLANG', 'FULLSTACK', 'DOCKER',
       'AWS_LAMBDA', 'PANDAS'
     ];
-    const fontSize = 20;             // size of each step
-    let columns: number;             // number of streams
-    let drops: number[] = [];        // vertical positions
+    const fontSize = 20;             
+    let columns: number;             
+    let drops: number[] = [];        
     let intervalId: ReturnType<typeof setInterval>;
   
     function resize() {
@@ -25,7 +25,6 @@
     }
   
     function draw() {
-      // fade old characters
       ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
   
@@ -59,7 +58,6 @@
   </script>
   
   <style>
-    /* full-screen, behind all content */
     canvas {
       position: fixed;
       top: 0;

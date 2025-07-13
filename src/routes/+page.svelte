@@ -1,7 +1,11 @@
 <script>
     import LandingSection from "../components/LandingSection.svelte";
 	import MatrixRain from "../components/MatrixRain.svelte";
+    import { matrixMode } from "$lib";
 </script>
 
-<MatrixRain />
+{#if $matrixMode}
+    <MatrixRain />
+{/if}
+
 <LandingSection />
