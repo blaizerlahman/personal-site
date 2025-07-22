@@ -3,6 +3,7 @@
 	import { cubicInOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
 	import { matrixMode } from '$lib';
+	import AolImageLoader from './matrix/AOLImageLoader.svelte';
   
 	const HALF_CYCLE = 4000;
 	const progress = tweened(0, {
@@ -90,11 +91,10 @@
 		  />
 		{:else}
 		  <!-- matrix mode headshot -->
-		  <img
+		  <AolImageLoader
 			src="/images/dithered_headshot.png"
 			alt="Dithered Headshot"
-			loading="lazy"
-			class="w-full h-full rounded-full border-8 border-violet-700
+			className="w-full h-full rounded-full border-8 border-violet-700
 				   object-cover object-center shadow-lg"
 		  />
 		{/if}

@@ -1,6 +1,6 @@
 <script>
     import LandingSection from "../components/LandingSection.svelte";
-	import MatrixRain from "../components/MatrixRain.svelte";
+	import MatrixRain from "../components/matrix/MatrixRain.svelte";
     import { matrixMode } from "$lib";
 </script>
 
