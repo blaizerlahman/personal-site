@@ -1,5 +1,6 @@
 <script lang="ts">
 	import '../app.css';
+	import GridBackground from '../components/GridBackground.svelte';
 	import Header from "../components/Header.svelte";
 
 	let y: number = 0;
@@ -17,6 +18,7 @@
 	class="container relative flex flex-col max-w-[1400px] mx-auto w-full text-sm sm:text-base min-h-screen"
 >
 	<Header {y} {innerHeight}/>
+	<GridBackground/>
 	
 	{@render children()}
 </div>

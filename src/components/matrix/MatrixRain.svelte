@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { showGrid } from '$lib';
   import { onMount } from 'svelte';
 
   let canvas: HTMLCanvasElement;
@@ -94,12 +95,18 @@
     ctx = canvas.getContext('2d')!;
     resize();
     
+    // turn off background grid
+    showGrid.set(false);
+
     window.addEventListener('resize', resize);
     intervalId = setInterval(draw, 80);
     
     return () => {
       clearInterval(intervalId);
       window.removeEventListener('resize', resize);
+      
+      // turn back on background grid
+      showGrid.set(true);
     };
   });
 </script>
