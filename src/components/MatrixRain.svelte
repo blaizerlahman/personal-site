@@ -37,8 +37,7 @@
     
     if (newColumns > columns) {
       for (let i = columns; i < newColumns; i++) {
-        const maxDrops = Math.floor(canvas.height / fontSize);
-        drops[i] = Math.floor(Math.random() * maxDrops);
+        drops[i] = 0;
       }
     } else if (newColumns < columns) {
       drops.length = newColumns;
@@ -96,7 +95,7 @@
     resize();
     
     window.addEventListener('resize', resize);
-    intervalId = setInterval(draw, 90);
+    intervalId = setInterval(draw, 80);
     
     return () => {
       clearInterval(intervalId);
