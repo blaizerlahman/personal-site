@@ -1,14 +1,34 @@
 <script lang="ts">
     import { matrixMode } from '$lib';
+    import { page } from '$app/stores';
+    import { goto } from '$app/navigation';
+
     export let y: number;
+
   
     export let tabs = [
-      { name: "About Me", link: "/about" },
-      { name: "Projects", link: "/projects" },
+      { name: "About Me", link: "#about" },
+      { name: "Projects", link: "#projects" },
       { name: "Bookshelf", link: "/bookshelf" },
       { name: "What's Going On", link: "/now" },
       { name: "Contact", link: "/contact" },
     ];
+
+    function handleIdClick(event: Event, elementName: string) {
+      event.preventDefault();
+
+      const elementID = elementName.replace('#', '')
+
+      if ($page.route.id === '/') {
+        const idElement = document.getElementById(elementID);
+        if (idElement) {
+          idElement.scrollIntoView({ behavior: 'smooth'});
+        }
+
+      } else {
+        goto(`/${elementName}`);
+      }
+    }
   </script>
   
   <header
@@ -25,13 +45,24 @@
   
     <div class="sm:flex items-center gap-4 hidden">
       {#each tabs as tab, index}
-        <a
-          href={tab.link}
-          class="duration-200 hover:text-violet-400"
-          target={index === 2 ? "_blank" : ""}
-        >
-          <p>{tab.name}</p>
-        </a>
+        {#if tab.name === "About Me" || tab.name === "Contact" || tab.name === "Projects"}
+          <a
+            href={tab.link}
+            class="duration-200 hover:text-violet-400"
+            on:click={(event) => handleIdClick(event, tab.link)}
+          >
+            <p>{tab.name}</p>
+          </a>
+
+        {:else}
+          <a
+            href={tab.link}
+            class="duration-200 hover:text-violet-400"
+            target={index === 2 ? "_blank" : ""}
+          >
+            <p>{tab.name}</p>
+          </a>
+        {/if}
       {/each}
   
       <button

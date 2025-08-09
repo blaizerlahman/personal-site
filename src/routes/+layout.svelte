@@ -3,9 +3,9 @@
 	import GridBackground from '../components/GridBackground.svelte';
 	import Header from "../components/Header.svelte";
 
-	let y: number = 0;
-	let innerWidth: number = 0;
-	let innerHeight: number = 0;
+	let y = $state(0)
+	let innerWidth = $state(0);
+	let innerHeight = $state(0);
 
 	function goTop() {
 		document.body.scrollIntoView({ behavior: 'smooth'});
