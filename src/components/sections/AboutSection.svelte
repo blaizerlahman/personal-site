@@ -1,5 +1,5 @@
 <main class="flex flex-col">
-  <section id="about" class="flex flex-col md:flex-row items-center gap-10 py-4
+  <section class="flex flex-col md:flex-row items-center gap-10 py-4
   max-w-[800px] mx-auto px-4 sm:px-8 lg:px-10">
     <div class="flex-1 space-y-6 text-left">
       My name is Blaize Lahman, I'm currently a Junior at the University of Wisconsin-Madison (roll badge!)

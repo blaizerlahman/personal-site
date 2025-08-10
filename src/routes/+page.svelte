@@ -7,6 +7,7 @@
 	import IntroSection from "../components/sections/WelcomeSection.svelte";
 	import ProjectSection from "../components/sections/LandingProjectSection.svelte";
 	import LandingProjectSection from "../components/sections/LandingProjectSection.svelte";
+	import ContactSection from "../components/sections/ContactSection.svelte";
 </script>
 
 {#if $matrixMode}
@@ -14,10 +15,11 @@
 {/if}
 
 <LandingSection />
-<SectionDivider name="Welcome" />
+<SectionDivider name="Welcome" id="welcome"/>
 <IntroSection />
-<SectionDivider name="About" />
+<SectionDivider name="About" id="about"/>
 <AboutSection />
-<SectionDivider name="Projects" />
+<SectionDivider name="Projects" id="projects"/>
 <LandingProjectSection />
-<SectionDivider name="Contact" />
+<SectionDivider name="Contact" id="contact"/>
+<ContactSection />

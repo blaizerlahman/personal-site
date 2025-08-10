@@ -4,7 +4,7 @@
 
 
 <main class="flex flex-col">
-  <section id="projects" class="flex flex-col md:flex-col items-center gap-10 py-4
+  <section class="flex flex-col md:flex-col items-center gap-10 py-4
   max-w-[800px] mx-auto px-4 sm:px-8 lg:px-10">
     <div class="flex-1 space-y-6 text-left">
       Enough of the boring stuff, let's get to the projects! A more detailed look at 
