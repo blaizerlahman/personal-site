@@ -4,6 +4,8 @@
     import { goto } from '$app/navigation';
 
     export let y: number;
+
+    let isMenuOpen = false;
   
     export let tabs = [
       { name: "About Me", link: "#about" },
@@ -37,6 +39,15 @@
       link.click();
       document.body.removeChild(link);
     }
+    
+    function toggleMenu() {
+      isMenuOpen = !isMenuOpen;
+    }
+
+    function toggleMatrixMode() {
+      matrixMode.update(mode => !mode);
+      isMenuOpen = false;
+    }
   </script>
   
   <header
@@ -50,7 +61,7 @@
     
     <div class="flex items-center gap-4">
       <h1 class="font-medium">
-        <b class="font-bold poppins">Blaize</b> <span>Lahman</span>
+        <b class="font-bold poppins">Blaize Lahman</b> 
       </h1>
   
       <button
@@ -109,6 +120,56 @@
           Matrix Mode
         {/if}
       </button>
+    </div>
+
+    <!--mobile dropdown menu-->
+    <div class="sm:hidden relative">
+      <button
+        on:click={toggleMenu}
+        class="flex flex-col justify-center items-center w-8 h-8 space-y-1 focus:outline-none"
+        aria-label="Toggle menu"
+      >
+        <span class="block w-6 h-0.5 bg-current duration-300"></span>
+        <span class="block w-6 h-0.5 bg-current duration-300"></span>
+        <span class="block w-6 h-0.5 bg-current duration-300"></span>
+      </button>
+  
+      {#if isMenuOpen}
+        <div class="absolute right-0 top-full mt-2 w-48 bg-slate-900 rounded-lg shadow-lg border border-violet-950 py-2 z-20">
+          {#each tabs as tab}
+            {#if tab.name === "About Me" || tab.name === "Contact" || tab.name === "Projects"}
+              <a
+                href={tab.link}
+                class="block px-4 py-2 text-sm hover:bg-slate-800 hover:text-violet-400 duration-200"
+                on:click={(event) => {
+                  handleIdClick(event, tab.link); 
+                  isMenuOpen = false;
+                }}
+              >
+                {tab.name}
+              </a>
+            {:else}
+              <a
+                href={tab.link}
+                class="block px-4 py-2 text-sm hover:bg-slate-800 hover:text-violet-400 duration-200"
+                on:click={() => isMenuOpen = false}
+              >
+                {tab.name}
+              </a>
+            {/if}
+          {/each}
+          <button
+            on:click={toggleMatrixMode}
+            class="quantico block w-full text-left px-4 py-2 text-sm hover:bg-slate-800 transition"
+          >
+            {#if $matrixMode}
+              Matrix Off
+            {:else}
+              Matrix Mode
+            {/if}
+          </button>
+        </div>
+      {/if}
     </div>
   </header>
   
