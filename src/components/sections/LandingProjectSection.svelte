@@ -17,7 +17,7 @@
         imageSrc="/images/enrollalert_logo_transparent.png"
         imageAlt="EnrollAlert Logo"
         description="A course enrollment tool for UW-Madison students that sends user-specified notifications for course openings."
-        tools={["Next.js", "TypeScript", "Go", "PostgreSQL", "AWS Lambda", "AWS SES", "Vercel"]}
+        tools={["TypeScript", "Go", "Next.js", "PostgreSQL", "AWS Lambda", "AWS SES", "Vercel"]}
         projectUrl="https://enrollalert.com"
         githubUrl="https://github.com/blaizerlahman/enroll-alert"
       />
@@ -34,7 +34,7 @@
         imageSrc="/images/personal_site_graphic.png"
         imageAlt="Computer and Person Icon"
         description="The site you're on right now! A showcase of my projects and development journey."
-        tools={["Svelte", "TypeScript", "HTML", "CSS"]}
+        tools={["Svelte", "TypeScript", "Tailwind", "HTML", "CSS"]}
         githubUrl="https://github.com/blaizerlahman/personal-site"
       />
     </div>

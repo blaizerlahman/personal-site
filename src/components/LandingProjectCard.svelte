@@ -31,7 +31,7 @@
     <img
       src={imageSrc}
       alt={imageAlt}
-      class="w-4/5 h-full object-cover transition-transform duration-300 
+      class="max-w-full max-h-full object-contain transition-transform duration-300 
              group-hover:scale-105 mx-auto my-auto px-4"
       loading="lazy"
     />
