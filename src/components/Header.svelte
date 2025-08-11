@@ -28,6 +28,15 @@
         goto(`/${elementName}`);
       }
     }
+
+    function downloadResume() {
+      const link = document.createElement('a');
+      link.href = '/blaize_lahman_resume.pdf';
+      link.download = 'blaize_lahman_resume.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   </script>
   
   <header
@@ -38,9 +47,34 @@
         : " py-6 bg-transparent border-transparent")
     }
   >
-    <h1 class="font-medium">
-      <b class="font-bold poppins">Blaize</b> <span>Lahman</span>
-    </h1>
+    
+    <div class="flex items-center gap-4">
+      <h1 class="font-medium">
+        <b class="font-bold poppins">Blaize</b> <span>Lahman</span>
+      </h1>
+  
+      <button
+        on:click={downloadResume}
+        class="flex items-center gap-2 px-3 py-1 rounded bg-violet-800 hover:bg-violet-700 transition duration-200 text-white"
+        aria-label="Download Resume"
+      >
+        Resume
+        <svg 
+          width="16" 
+          height="16" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          stroke-width="2" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+        >
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7,10 12,15 17,10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+      </button>
+    </div>
   
     <div class="sm:flex items-center gap-4 hidden">
       {#each tabs as tab, index}
@@ -63,7 +97,7 @@
           </a>
         {/if}
       {/each}
-  
+
       <button
         on:click={() => matrixMode.update(n => !n)}
         class="px-3 py-1 rounded bg-slate-800 hover:bg-slate-700 transition"
