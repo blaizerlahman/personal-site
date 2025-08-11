@@ -100,7 +100,7 @@
 
       <button
         on:click={() => matrixMode.update(n => !n)}
-        class="px-3 py-1 rounded bg-slate-800 hover:bg-slate-700 transition"
+        class="quantico px-3 py-1 rounded bg-slate-800 hover:bg-slate-700 transition"
         aria-label="Toggle Matrix Mode"
       >
         {#if $matrixMode}
