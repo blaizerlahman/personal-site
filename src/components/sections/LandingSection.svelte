@@ -19,6 +19,7 @@
 				<p>
 					I'm a backend-focused full stack developer with a passion for building software that <strong>helps</strong> people.
 				</p>
+				<br>
 				<p>
 					Currently a Computer Science and Data Science major at the University of Wisconsin-Madison focused on expanding my 
 					technical knowledge in full stack development, data science, and cybersecurity.
