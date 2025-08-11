@@ -5,6 +5,7 @@
 
 	export let src: string;
 	export let alt: string;
+  export let className: string = 'w-full h-full rounded-full border-8 object-cover object-center shadow-lg';
 	export let size: string = '18rem'; 
 	export let mdSize: string = '20rem'; 
 	export let glowColor: string = '139,92,246';
@@ -58,7 +59,7 @@
 		{src}
 		{alt}
 		loading="lazy"
-		class="w-full h-full rounded-full border-8 object-cover object-center shadow-lg {borderColor}"
+		class="{className} {borderColor}"
 		style={headStyle}
 	/>
 </div>

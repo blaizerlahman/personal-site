@@ -5,7 +5,6 @@
 	import AboutSection from "../components/sections/AboutSection.svelte";
 	import SectionDivider from "../components/SectionDivider.svelte";
 	import IntroSection from "../components/sections/WelcomeSection.svelte";
-	import ProjectSection from "../components/sections/LandingProjectSection.svelte";
 	import LandingProjectSection from "../components/sections/LandingProjectSection.svelte";
 	import ContactSection from "../components/sections/ContactSection.svelte";
 </script>

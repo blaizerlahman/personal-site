@@ -4,7 +4,6 @@
     import { goto } from '$app/navigation';
 
     export let y: number;
-
   
     export let tabs = [
       { name: "About Me", link: "#about" },

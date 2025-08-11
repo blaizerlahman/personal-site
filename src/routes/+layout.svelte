@@ -17,7 +17,7 @@
 <div 
 	class="container relative flex flex-col max-w-[1400px] mx-auto w-full text-sm sm:text-base min-h-screen"
 >
-	<Header {y} {innerHeight}/>
+	<Header {y}/>
 	<GridBackground/>
 	
 	{@render children()}
