@@ -1,4 +1,5 @@
 <script lang="ts">
+  import TextBox from "../TextBox.svelte";
   import LandingProjectCard from "../LandingProjectCard.svelte";
 </script>
 
@@ -7,8 +8,10 @@
   <section class="flex flex-col md:flex-col items-center gap-10 py-4
   max-w-[800px] mx-auto px-4 sm:px-8 lg:px-10">
     <div class="flex-1 space-y-6 text-left">
-      Enough of the boring stuff, let's get to the projects! A more detailed look at 
-      all of these can be found on the projects page, this is just a brief overview.
+      <TextBox>
+        Enough of the boring stuff, let's get to the projects! A more detailed look at 
+        all of these can be found on their respective Github pages, this is just a brief overview.
+      </TextBox>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

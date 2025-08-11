@@ -1,4 +1,5 @@
 <script lang="ts">
+  import TextBox from '../TextBox.svelte';
 	import FloatingBlobImage from '../FloatingBlobImage.svelte';
 	import { matrixMode } from '$lib';
 	import AolImageLoader from '../matrix/AOLImageLoader.svelte';
@@ -11,7 +12,6 @@
 
 	const contactInfo = {
 		name: "Blaize Lahman",
-		title: "Contact Me",
 		description: "I'm always interested in exploring new opportunities, collaborating on development, or just talking. Feel free to send me an email!",
 		email: "blermdotdev@gmail.com",
 		linkedin: "https://linkedin.com/in/blaizelahman",
@@ -58,11 +58,13 @@
 		<div class="flex-1 space-y-8 text-left">
 			<div class="space-y-4">
 				<h1 class="text-4xl sm:text-5xl font-bold leading-tight">
-					{contactInfo.title}
+					Contact Me
 				</h1>
-				<p class="text-lg text-gray-600 dark:text-gray-300">
-					{contactInfo.description}
-				</p>
+        <TextBox>
+          <p class="text-lg">
+            {contactInfo.description}
+          </p>
+        </TextBox>
 			</div>
 
 			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
