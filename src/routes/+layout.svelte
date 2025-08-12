@@ -1,9 +1,12 @@
 <script lang="ts">
 	import '../app.css';
+	import { injectAnalytics } from '@vercel/analytics/sveltekit'
 	import GridBackground from '../components/GridBackground.svelte';
 	import Header from "../components/Header.svelte";
 
-	let y = $state(0)
+	injectAnalytics();
+
+	let y = $state(0);
 	let innerWidth = $state(0);
 	let innerHeight = $state(0);
 
