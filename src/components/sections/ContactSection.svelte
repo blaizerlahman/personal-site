@@ -13,7 +13,7 @@
 	const contactInfo = {
 		name: "Blaize Lahman",
 		description: "I'm always interested in exploring new opportunities, collaborating on development, or just talking. Feel free to send me an email!",
-		email: "blermdotdev@gmail.com",
+		email: "blaizelahman@gmail.com",
 		linkedin: "https://linkedin.com/in/blaizelahman",
 		github: "https://github.com/blaizerlahman",
 		location: "Madison, WI"
