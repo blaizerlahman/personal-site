@@ -9,6 +9,12 @@
 	import ContactSection from "../components/sections/ContactSection.svelte";
 </script>
 
+<svelte:head>
+	<title>Blaize Lahman Personal Website and Developer Portfolio</title>
+	<meta name="description" content="Official site of Blaize Lahman. View projects, resume, and contact info.">
+	<meta name="keywords" content="Blaize Lahman, blaize, lahman, enrollalert, portfolio, computer science, data science, UW-Madison, software developer">
+</svelte:head>
+
 {#if $matrixMode}
     <MatrixRain />
 {/if}
