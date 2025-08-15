@@ -1,7 +1,7 @@
 <script>
-    import LandingSection from "../components/sections/LandingSection.svelte";
+  import LandingSection from "../components/sections/LandingSection.svelte";
 	import MatrixRain from "../components/matrix/MatrixRain.svelte";
-    import { matrixMode } from "$lib";
+  import { matrixMode } from "$lib";
 	import AboutSection from "../components/sections/AboutSection.svelte";
 	import SectionDivider from "../components/SectionDivider.svelte";
 	import IntroSection from "../components/sections/WelcomeSection.svelte";
