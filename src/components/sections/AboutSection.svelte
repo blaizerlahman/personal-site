@@ -13,9 +13,9 @@
         I have been coding seriously since 2023, and my current programming interests include terminal apps,
         analytic and cybersecurity tools, and basically anything that can help people. 
         <br><br>
-        I do not develop for work currently (although I am looking and would be open to any inquiries!)
-        and do so mainly to build tools for myself and others. I do however work for the
-        Department of Computer Science here at UW where I continue to develop techincal skills as 
+        As far as development work goes, I am an incoming Software Engineer Intern on the Dell CSG team,
+        where I will work during Summer 2026. I also work for the
+        Department of Computer Science here at UW where I continue to develop technical skills as 
         an undergraduate TA for CS320, an intermediate Data Programming course taught in Python.
         <br><br>
         Outside of programming I enjoy being out in nature (hiking and fishing),

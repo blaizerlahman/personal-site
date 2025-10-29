@@ -15,6 +15,10 @@
 		  	Blaize&nbsp;Lahman
 			</h1>
 
+      <h3 class="text-lg sm:text-xl leading-tight text-zinc-400 -mt-6">
+        Incoming SWE Intern&nbsp;@&nbsp;Dell
+      </h3>
+
 			<TextBox>
 				<p>
 					I'm a backend-focused full stack developer with a passion for building software that <strong>helps</strong> people.
