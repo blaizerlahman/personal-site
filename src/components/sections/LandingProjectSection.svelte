@@ -19,7 +19,7 @@
         name="EnrollAlert"
         imageSrc="/images/enrollalert_logo_transparent.png"
         imageAlt="EnrollAlert Logo"
-        description="A course enrollment tool for UW-Madison students that sends user-specified notifications for course openings."
+        description="A course enrollment tool for UW-Madison students that sends user-specified notifications for course openings. Currently serves more than 200 UW-Madison students and 600+ active alerts."
         tools={["TypeScript", "Go", "Next.js", "PostgreSQL", "AWS Lambda", "AWS SES", "Vercel"]}
         projectUrl="https://enrollalert.com"
         githubUrl="https://github.com/blaizerlahman/enroll-alert"
