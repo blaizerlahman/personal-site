@@ -19,7 +19,7 @@
         an undergraduate TA for CS320, an intermediate Data Programming course taught in Python.
         <br><br>
         Outside of programming I enjoy being out in nature (hiking and fishing),
-        spending time with friends and family (the most important thing), and learning the guitar.
+        spending time with friends and family, and learning the guitar.
       </TextBox>   
     </div>
   </section>
