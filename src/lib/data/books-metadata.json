@@ -8,7 +8,7 @@
 			"githubPath": "Development/Tech Books/Designing Data-Intensive Applications"
 		},
 		"operating-systems-three-easy-pieces": {
-			"title": "Operating Systems: Three Easy Pieces",
+			"title": "Operating Systems - Three Easy Pieces",
 			"author": "Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau",
 			"spineColor": "#7C3AED",
 			"textColor": "#FFFFFF",
@@ -22,7 +22,7 @@
 			"githubPath": "Development/Tech Books/Design Patterns - Elements of Reusable Object-Oriented Software"
 		},
 		"a-tour-of-c-plus-plus": {
-			"title": "A Tour of C++ (2nd Edition)",
+			"title": "A Tour of C++",
 			"author": "Bjarne Stroustrup",
 			"spineColor": "#FF474D",
 			"textColor": "#FFFFFF",
