@@ -5,6 +5,7 @@
 			"author": "Martin Kleppmann",
 			"spineColor": "#8B5CF6",
 			"textColor": "#FFFFFF",
+			"description": "The Backend Bible",
 			"githubPath": "Development/Tech Books/Designing Data-Intensive Applications"
 		},
 		"operating-systems-three-easy-pieces": {
@@ -12,6 +13,7 @@
 			"author": "Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau",
 			"spineColor": "#7C3AED",
 			"textColor": "#FFFFFF",
+      "description": "My favorite textbook for my favorite course (so far)",
 			"githubPath": "Development/Tech Books/Operating Systems - Three Easy Pieces"
 		},
 		"design-patterns-elements-of-reusable-object-oriented-software": {
@@ -19,6 +21,7 @@
 			"author": "Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides",
 			"spineColor": "#90D5FF",
 			"textColor": "#FFFFFF",
+			"description": "The OOP Bible",
 			"githubPath": "Development/Tech Books/Design Patterns - Elements of Reusable Object-Oriented Software"
 		},
 		"a-tour-of-c-plus-plus": {
@@ -26,6 +29,7 @@
 			"author": "Bjarne Stroustrup",
 			"spineColor": "#FF474D",
 			"textColor": "#FFFFFF",
+			"description": "For making myself learn C++",
 			"githubPath": "Development/Tech Books/A Tour of C++"
 		}
 	}

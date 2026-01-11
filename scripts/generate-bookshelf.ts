@@ -6,6 +6,7 @@ interface BookMetadata {
 	author: string;
 	spineColor: string;
 	textColor: string;
+  description: string;
 	githubPath: string;
 }
 
@@ -15,27 +16,39 @@ interface BooksMetadata {
 
 interface NotesFolder {
 	title: string;
-	repoPath: string;
-	notes: string[];
+	githubPath: string;
+	chapters: Chapter[];
 	subfolders: NotesFolder[];
 }
 
 interface BookNotes {
+  id: string;
 	title: string;
-	repoPath: string;
-	notes: string[];
+  author: string;
+  spineColor: string;
+  textColor: string;
+  description: string;
+	githubPath: string;
+	chapters: Chapter[];
 	subfolders: NotesFolder[];
+}
+
+interface Chapter {
+	id: string;
+	title: string;
+	file: string;
 }
 
 /**
  * Fetches the contents of a directory from a GitHub repository using the GitHub API.
  *
- * @param repoPath - The path to the directory within the repository (e.g., "Development/Tech Books/Operating Systems")
+ * @param githubPath - The path to the directory within the repository (e.g., "Development/Tech Books/Operating Systems")
  * @returns A promise that resolves to an array of directory contents
  * @throws Error if GitHub token, owner, or repo environment variables are missing
  * @throws Error if the API request fails
  */
-async function getGitHubDirContents(repoPath: string): Promise<any[]> {
+async function getGitHubDirContents(githubPath: string): Promise<any[]> {
+
 	const token = process.env.GH_TOKEN;
 	if (!token) {
 		throw new Error('Missing Github auth token variable.');
@@ -47,7 +60,7 @@ async function getGitHubDirContents(repoPath: string): Promise<any[]> {
 		throw new Error('Missing repo owner or repo name variables.');
 	}
 
-	const url = `https://api.github.com/repos/${owner}/${repo}/contents/${repoPath}`;
+	const url = `https://api.github.com/repos/${owner}/${repo}/contents/${githubPath}`;
 
 	// GET request for repo contents
 	const resp = await fetch(url, {
@@ -58,16 +71,19 @@ async function getGitHubDirContents(repoPath: string): Promise<any[]> {
 	});
 
 	if (!resp.ok) {
-		throw new Error(`Github API error for ${repoPath}: ${resp.status} ${resp.statusText}`);
-	}
-
-	if (repoPath == 'Development/Tech Books/Operating Systems - Three Easy Pieces') {
-		const data = await resp.json();
-		console.log(data);
-		return data;
+		throw new Error(`Github API error for ${githubPath}: ${resp.status} ${resp.statusText}`);
 	}
 
 	return await resp.json();
+}
+
+/**
+ * Generates URL-safe chapter ID from filename
+ */
+function generateChapterId(filename: string): string {
+
+  // replace non-alpha (whitespace) w/ dashses and remove leading/end dashses
+	return filename.replace('.md', '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
 
 /**
@@ -77,8 +93,10 @@ async function getGitHubDirContents(repoPath: string): Promise<any[]> {
  * @throws Error if the books-metadata.json file cannot be found or read
  */
 async function getBooksMetadata(): Promise<BooksMetadata> {
+
 	let metadataJSON: string;
 
+  // read book metadata 
 	try {
 		metadataJSON = await fs.readFile(
 			path.join(process.cwd(), 'src/lib/data/books-metadata.json'),
@@ -88,13 +106,7 @@ async function getBooksMetadata(): Promise<BooksMetadata> {
 		throw new Error(`Could not find books-metadata.json: ${error}`);
 	}
 
-	// console.log(metadataJSON);
-
 	const booksMetadata: BooksMetadata = JSON.parse(metadataJSON);
-
-	// console.log(Object.keys(booksMetadata.books));
-
-	// console.log(Object.values(booksMetadata.books));
 
 	return booksMetadata;
 }
@@ -102,47 +114,100 @@ async function getBooksMetadata(): Promise<BooksMetadata> {
 /**
  * Recursively builds a NotesFolder structure by fetching contents from GitHub.
  *
- * @param notesFolder - The NotesFolder to populate (must have repoPath set)
+ * @param notesFolder - The NotesFolder to populate (must have githubPath set)
  * @throws Error if GitHub API request fails
  */
-async function buildNotesFolder(notesFolder: NotesFolder): Promise<void> {
+async function buildNotesFolder(notesFolder: NotesFolder, bookPath: string): Promise<void> {
 
-	const noteDirs = await getGitHubDirContents(notesFolder.repoPath);
+	const noteDirs = await getGitHubDirContents(notesFolder.githubPath);
 
-  // go through directory and create nested subfolders
+	// go through directory and create nested subfolders
 	for (const note of noteDirs) {
 
+    // if regular note, create a chapter object with it, else create subfolder with it
 		if (note.name.endsWith('.md')) {
 
-      // don't add folder files
-      if (note.name.replace('.md', '') !== notesFolder.title) {
-        notesFolder.notes.push(note.name);
-      }
+			// don't add folder files (same name as folder or book)
+			if (note.name.replace('.md', '') !== notesFolder.title) {
+				notesFolder.chapters.push({
+          id: generateChapterId(note.name),
+          title: note.name.replace('.md', ''),
+          file: notesFolder.githubPath.replace(bookPath + '/', '') + '/'
+        });
+			}
 		} else {
-
-			const subfolderPath = path.join(notesFolder.repoPath, note.name);
+			const subfolderPath = path.join(notesFolder.githubPath, note.name);
 
 			const subfolder: NotesFolder = {
 				title: note.name,
-				repoPath: subfolderPath,
-				notes: [],
+				githubPath: subfolderPath,
+				chapters: [],
 				subfolders: []
 			};
 
-      // create subfolder and recursively build it
-			await buildNotesFolder(subfolder);
+			// create subfolder and recursively build it
+			await buildNotesFolder(subfolder, bookPath);
 
-			notesFolder.subfolders.push(subfolder);
+			// add subfolder to notes if it has content
+			if (subfolder.chapters.length > 0 || subfolder.subfolders.length > 0) {
+				notesFolder.subfolders.push(subfolder);
+			}
+		}
+	}
+}
+
+/**
+ * Recursively flattens all chapters from NotesFolder into index
+ */
+function flattenNotesFolder(notesFolder: NotesFolder,bookPath: string,): Record<string, { title: string; file: string; bookPath: string }> {
+
+	const chapters: Record<string, { title: string; file: string; bookPath: string }> = {};
+
+	// add notes from this folder
+	for (const chapter of notesFolder.chapters) {
+		chapters[chapter.id] = {
+			title: chapter.title,
+			file: chapter.file,
+			bookPath: bookPath
+		};
+	}
+
+	// recursively add from subfolders
+	for (const subfolder of notesFolder.subfolders) {
+		const subChapters = flattenNotesFolder(subfolder, bookPath);
+		Object.assign(chapters, subChapters);
+	}
+
+	return chapters;
+}
+
+/**
+ * Creates flat chapter index for O(1) lookups
+ */
+function createChapterIndex(books: BookNotes[]): Record<string, Record<string, any>> {
+
+	const index: Record<string, Record<string, any>> = {};
+
+	for (const book of books) {
+		index[book.id] = {};
+
+		// add root notes
+		for (const chapter of book.chapters) {
+			index[book.id][chapter.id] = {
+				title: chapter.title,
+				file: chapter.file,
+				bookPath: book.githubPath
+			};
+		}
+
+		// add notes from subfolders (flattened)
+		for (const subfolder of book.subfolders) {
+			const folderChapters = flattenNotesFolder(subfolder, book.githubPath);
+			Object.assign(index[book.id], folderChapters);
 		}
 	}
 
-  //for (const note of notesFolder.notes) {
-  //  console.log(`NESTED NOTE in ${notesFolder.title}: ${note}`);
-  //}
-
-  //for (const subdir of notesFolder.subfolders) {
-  //  console.log(`NESTED SUBFOLDER in ${notesFolder.title}: ${subdir.title}`);
-  //}
+	return index;
 }
 
 // generateBookshelf Main driver function for getting metadata and building bookshelf information from it.
@@ -154,60 +219,83 @@ async function generateBookshelf() {
 		process.exit(1);
 	});
 
-	// parse metadata to get book info and GH link
-	for (const bookMetadata of Object.values(booksMetadata.books)) {
-		console.log(
-			`Getting github dir contents for ${bookMetadata.title} with path ${bookMetadata.githubPath}`
-		);
-		const bookDirs = await getGitHubDirContents(bookMetadata.githubPath);
+	const books: BookNotes[] = [];
 
-		// to store book notes and nested folders of notes in
-		const bookNotes: BookNotes = {
-			title: bookMetadata.title,
-			repoPath: bookMetadata.githubPath,
-			notes: [],
-			subfolders: []
-		};
+	// parse metadata to get book info and GH link 
+	for (const [bookId, bookMetadata] of Object.entries(booksMetadata.books)) {
 
-		// go through files and add any markdown files to notes, otherwise recursively build notes subfolders
-		for (const subdir of bookDirs) {
-			if (subdir.name.endsWith('.md')) {
-				// skip if it's a folder file
-				if (subdir.name.replace('.md', '') !== bookNotes.title) {
-					bookNotes.notes.push(subdir.name);
+		try {
+			const bookDirs = await getGitHubDirContents(bookMetadata.githubPath);
+
+			// to store book notes and nested folders of notes in
+			const bookNotes: BookNotes = {
+        id: bookId,
+				title: bookMetadata.title,
+        author: bookMetadata.author,
+        spineColor: bookMetadata.spineColor,
+        textColor: bookMetadata.textColor,
+        description: bookMetadata.description,
+				githubPath: bookMetadata.githubPath,
+				chapters: [],
+				subfolders: []
+			};
+
+			// go through files and add any markdown files to notes, otherwise recursively build notes subfolders
+			for (const subdir of bookDirs) {
+
+				if (subdir.name.endsWith('.md')) {
+					// skip if it's a folder file
+					if (subdir.name.replace('.md', '') !== bookNotes.title) {
+						bookNotes.chapters.push({
+              id: generateChapterId(subdir.name),
+              title: subdir.name.replace('.md', ''),
+              file: subdir.name
+            });
+					}
+				} else {
+					const subfolderPath = path.join(bookMetadata.githubPath, subdir.name);
+
+					const notesFolder: NotesFolder = {
+						title: subdir.name,
+						githubPath: subfolderPath,
+						chapters: [],
+						subfolders: []
+					};
+
+					// recursively builds nested notes/subfolders
+					await buildNotesFolder(notesFolder, bookMetadata.githubPath);
+
+					// add to book notes if it has content
+					if (notesFolder.chapters.length > 0 || notesFolder.subfolders.length > 0) {
+						bookNotes.subfolders.push(notesFolder);
+					}
 				}
-			} else {
-
-				const subfolderPath = path.join(bookMetadata.githubPath, subdir.name);
-
-				const notesFolder: NotesFolder = {
-					title: subdir.name,
-					repoPath: subfolderPath,
-					notes: [],
-					subfolders: []
-				};
-
-        // recursively builds nested notes/subfolders
-				await buildNotesFolder(notesFolder);
-
-        // add to book notes
-				bookNotes.subfolders.push(notesFolder);
 			}
+
+			books.push(bookNotes);
+
+		} catch (error) {
+			console.error(`Failed to scan ${bookId}:`, error instanceof Error ? error.message : error);
 		}
-
-		//for (const note of bookNotes.notes) {
-		//	console.log(`BOOK NOTE: ${note}`);
-		//}
-
-		//for (const subfolder of bookNotes.subfolders) {
-		//	console.log(`SUBFOLDER: ${subfolder.title}`);
-		//}
 	}
+
+	// create flat chapter index
+	const chapterIndex = createChapterIndex(books);
+	const totalChapters = Object.values(chapterIndex).reduce((sum, book) => sum + Object.keys(book).length, 0);
+
+	// create final bookshelf structure
+	const bookshelf = {
+		books,
+		chapterIndex,
+		lastUpdated: new Date().toISOString()
+	};
+
+	// write to file
+	const outputPath = path.join(process.cwd(), 'src/lib/data/bookshelf.json');
+	await fs.writeFile(outputPath, JSON.stringify(bookshelf, null, 2));
 }
 
-generateBookshelf();
-
-//getGitHubDirContents("Development/Tech Books/Operating Systems - Three Easy Pieces").catch((error) => {
-//  console.error(error);
-//  process.exit(1);
-//});
+generateBookshelf().catch((error) => {
+	console.error('Error in bookshelf generation:', error);
+	process.exit(1);
+});
