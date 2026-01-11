@@ -10,9 +10,9 @@
   export let tabs = [
     { name: "About Me", link: "#about" },
     { name: "Projects", link: "#projects" },
-    // { name: "Bookshelf", link: "/bookshelf" },
     // { name: "What's Going On", link: "/now" },
     { name: "Contact", link: "#contact" },
+    { name: "Bookshelf", link: "/bookshelf" },
   ];
 
   function handleIdClick(event: Event, elementName: string) {

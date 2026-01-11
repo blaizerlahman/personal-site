@@ -31,6 +31,10 @@
       // get markdown note
       const resp = await fetch(`/api/books/${bookId}/${chapterId}`);
       const data = await resp.json();
+      
+      console.log('API Response:', data);  
+      console.log('data.markdown type:', typeof data.markdown); 
+      console.log('data.markdown value:', data.markdown);
 
       if (!resp.ok) {
         throw new Error(data.error || `Failed to fetch book ${bookId} chapter ${chapterId}: $resp.statusText`);

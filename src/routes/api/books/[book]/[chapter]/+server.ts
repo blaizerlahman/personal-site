@@ -25,16 +25,14 @@ export const GET: RequestHandler = async ({ params, setHeaders }) => {
 
 	// if it's a root chapter note it'll have same title/filename, so just append filename to path
 	// otherwise append chapter name to note title
-	if (chapter.file.endWith('.md') && chapter.file.replace('.md', '') == chapter.file.title) {
+	if (chapter.file.endsWith('.md') && chapter.file.replace('.md', '') === chapter.title) {
 		filePath = `${chapter.bookPath}/${chapter.file}`;
 	} else {
-		filePath = `${chapter.bookPath}/${chapter.file}${chapter.title}`;
+		filePath = `${chapter.bookPath}/${chapter.file}${chapter.title}.md`;
 	}
 
-	console.log(`FILE PATH: ${filePath}`);
-
 	try {
-		const resp = await fetchGithubFile(filePath);
+		const resp = await fetchGithubFile(filePath, true);
 
 		// cache for 1 day and allow stale for 1 week
 		setHeaders({
@@ -44,7 +42,7 @@ export const GET: RequestHandler = async ({ params, setHeaders }) => {
 		});
 
 		return json({
-			resp,
+			markdown: resp,
 			metadata: {
 				book: bookId,
 				chapter: chapterId,

@@ -1,12 +1,13 @@
 /**
- * Fetches the contents of a directory from a GitHub repository/file using the GitHub API.
+ * Fetches the contents of a file/directory from a GitHub repository/file using the GitHub API.
  *
  * @param githubPath - The path to the directory within the repository
- * @returns A promise that resolves to an array of directory contents
+ * @param raw - bool specifying whetehr or not to return a raw file (if not returns jason)
+ * @returns A promise that resolves to either a JSON object representing file/dir contents or raw file string
  * @throws Error if GitHub token, owner, or repo environment variables are missing
  * @throws Error if the API request fails
  */
-export async function fetchGithubFile(filePath: string): Promise<string> {
+export async function fetchGithubFile(filePath: string, raw: boolean = false): Promise<string | any> {
   const token = process.env.GH_TOKEN;
   if (!token) {
     throw new Error("Github token variable not provided.");
@@ -20,9 +21,10 @@ export async function fetchGithubFile(filePath: string): Promise<string> {
 
   const url = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
 
+  // fetches either raw text or json representation of file
   const resp = await fetch(url, {
     headers: {
-      Accept: "application/vnd.github+json",
+      Accept: raw ? "application/vnd.github.v3.raw" : "application/vnd.github+json", // content type based on raw specification
       Authorization: `Bearer ${token}`
     }
   });
@@ -31,5 +33,6 @@ export async function fetchGithubFile(filePath: string): Promise<string> {
     throw new Error(`Github API error for ${filePath}: ${resp.status} ${resp.statusText}`);
   }
   
-  return await resp.json();
+  // return text if raw specified else return JSON object
+  return raw ? await resp.text() : await resp.json();
 }
