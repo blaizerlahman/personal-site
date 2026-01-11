@@ -1,5 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
+import { fetchGithubFile } from '#lib/utils/github.js';
 
 interface BookMetadata {
 	title: string;
@@ -37,44 +38,6 @@ interface Chapter {
 	id: string;
 	title: string;
 	file: string;
-}
-
-/**
- * Fetches the contents of a directory from a GitHub repository using the GitHub API.
- *
- * @param githubPath - The path to the directory within the repository (e.g., "Development/Tech Books/Operating Systems")
- * @returns A promise that resolves to an array of directory contents
- * @throws Error if GitHub token, owner, or repo environment variables are missing
- * @throws Error if the API request fails
- */
-async function getGitHubDirContents(githubPath: string): Promise<any[]> {
-
-	const token = process.env.GH_TOKEN;
-	if (!token) {
-		throw new Error('Missing Github auth token variable.');
-	}
-
-	const owner = process.env.GH_OWNER;
-	const repo = process.env.GH_REPO;
-	if (!owner || !repo) {
-		throw new Error('Missing repo owner or repo name variables.');
-	}
-
-	const url = `https://api.github.com/repos/${owner}/${repo}/contents/${githubPath}`;
-
-	// GET request for repo contents
-	const resp = await fetch(url, {
-		headers: {
-			Accept: 'application/vnd.github+json',
-			Authorization: `Bearer ${token}`
-		}
-	});
-
-	if (!resp.ok) {
-		throw new Error(`Github API error for ${githubPath}: ${resp.status} ${resp.statusText}`);
-	}
-
-	return await resp.json();
 }
 
 /**
@@ -119,7 +82,7 @@ async function getBooksMetadata(): Promise<BooksMetadata> {
  */
 async function buildNotesFolder(notesFolder: NotesFolder, bookPath: string): Promise<void> {
 
-	const noteDirs = await getGitHubDirContents(notesFolder.githubPath);
+	const noteDirs = await fetchGithubFile(notesFolder.githubPath);
 
 	// go through directory and create nested subfolders
 	for (const note of noteDirs) {
@@ -225,7 +188,7 @@ async function generateBookshelf() {
 	for (const [bookId, bookMetadata] of Object.entries(booksMetadata.books)) {
 
 		try {
-			const bookDirs = await getGitHubDirContents(bookMetadata.githubPath);
+			const bookDirs = await fetchGithubFile(bookMetadata.githubPath);
 
 			// to store book notes and nested folders of notes in
 			const bookNotes: BookNotes = {
