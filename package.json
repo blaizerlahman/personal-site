@@ -11,7 +11,9 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint ."
+		"lint": "prettier --check . && eslint .",
+		"generate:bookshelf": "tsx scripts/generate-bookshelf.ts",
+		"prebuild": "pnpm run generate:bookshelf"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
@@ -31,6 +33,7 @@
 		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
 		"tailwindcss": "^4.0.0",
+		"tsx": "^4.21.0",
 		"typescript": "^5.0.0",
 		"typescript-eslint": "^8.20.0",
 		"vite": "^6.2.6",
@@ -42,6 +45,11 @@
 		]
 	},
 	"dependencies": {
-		"@vercel/analytics": "^1.5.0"
+		"@vercel/analytics": "^1.5.0",
+		"highlight.js": "^11.11.1",
+		"marked": "^17.0.1"
+	},
+	"imports": {
+		"#lib/*": "./src/lib/*"
 	}
 }

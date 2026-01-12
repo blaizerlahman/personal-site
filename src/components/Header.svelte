@@ -10,9 +10,9 @@
   export let tabs = [
     { name: "About Me", link: "#about" },
     { name: "Projects", link: "#projects" },
-    // { name: "Bookshelf", link: "/bookshelf" },
     // { name: "What's Going On", link: "/now" },
     { name: "Contact", link: "#contact" },
+    { name: "Bookshelf", link: "/bookshelf" },
   ];
 
   function handleIdClick(event: Event, elementName: string) {
@@ -60,13 +60,13 @@
 >
   
   <div class="flex items-center gap-4">
-    <h1 class="font-medium">
-      <b class="font-bold poppins">Blaize Lahman</b> 
+    <h1 class="font-medium whitespace-nowrap">
+      <a href="/"><b class="font-bold poppins">Blaize Lahman</b></a>
     </h1>
 
     <button
       on:click={downloadResume}
-      class="flex items-center gap-2 px-3 py-1 rounded bg-violet-800 hover:bg-violet-700 transition duration-200 text-white"
+      class="flex items-center gap-2 px-3 py-1 rounded bg-violet-800 hover:bg-violet-700 transition duration-200 text-white whitespace-nowrap"
       aria-label="Download Resume"
     >
       Resume
@@ -87,12 +87,12 @@
     </button>
   </div>
 
-  <div class="sm:flex items-center gap-4 hidden">
+  <div class="md:flex items-center gap-4 hidden">
     {#each tabs as tab, index}
       {#if tab.name === "About Me" || tab.name === "Contact" || tab.name === "Projects"}
         <a
           href={tab.link}
-          class="duration-200 hover:text-violet-400"
+          class="duration-200 hover:text-violet-400 whitespace-nowrap"
           on:click={(event) => handleIdClick(event, tab.link)}
         >
           <p>{tab.name}</p>
@@ -101,7 +101,7 @@
       {:else}
         <a
           href={tab.link}
-          class="duration-200 hover:text-violet-400"
+          class="duration-200 hover:text-violet-400 whitespace-nowrap"
           target={index === 2 ? "_blank" : ""}
         >
           <p>{tab.name}</p>
@@ -111,19 +111,19 @@
 
     <button
       on:click={() => matrixMode.update(n => !n)}
-      class="quantico px-3 py-1 rounded bg-slate-800 hover:bg-slate-700 transition"
-      aria-label="Toggle Matrix Mode"
+      class="quantico px-3 py-1 rounded bg-slate-800 hover:bg-slate-700 transition whitespace-nowrap"
+      aria-label="Toggle Matrix Rain"
     >
       {#if $matrixMode}
         Matrix Off
       {:else}
-        Matrix Mode
+        Matrix Rain
       {/if}
     </button>
   </div>
 
   <!--mobile dropdown menu-->
-  <div class="sm:hidden relative">
+  <div class="md:hidden relative">
     <button
       on:click={toggleMenu}
       class="flex flex-col justify-center items-center w-8 h-8 space-y-1 focus:outline-none"

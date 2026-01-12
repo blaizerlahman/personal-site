@@ -1,7 +1,5 @@
 <script>
   import LandingSection from "../components/sections/LandingSection.svelte";
-	import MatrixRain from "../components/matrix/MatrixRain.svelte";
-  import { matrixMode } from "$lib";
 	import AboutSection from "../components/sections/AboutSection.svelte";
 	import SectionDivider from "../components/SectionDivider.svelte";
 	import IntroSection from "../components/sections/WelcomeSection.svelte";
@@ -14,10 +12,6 @@
 	<meta name="description" content="Official site of Blaize Lahman. View projects, resume, and contact info.">
 	<meta name="keywords" content="Blaize Lahman, blaize, lahman, enrollalert, portfolio, computer science, data science, UW-Madison, software developer">
 </svelte:head>
-
-{#if $matrixMode}
-    <MatrixRain />
-{/if}
 
 <LandingSection />
 <SectionDivider name="Welcome" id="welcome"/>

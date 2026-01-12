@@ -16,7 +16,7 @@
     borderWidth = 'thin',
     children
   }: Props = $props();
-  
+
   const paddingClasses = {
     sm: 'p-4',
     md: 'p-6',
