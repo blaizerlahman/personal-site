@@ -135,12 +135,12 @@
     </button>
 
     {#if isMenuOpen}
-      <div class="absolute right-0 top-full mt-2 w-48 bg-slate-900 rounded-lg shadow-lg border border-violet-950 py-2 z-20">
+      <div class="absolute right-0 top-full mt-2 w-34 bg-slate-900 rounded-lg shadow-lg border border-violet-950 py-2 z-20">
         {#each tabs as tab}
           {#if tab.name === "About Me" || tab.name === "Contact" || tab.name === "Projects"}
             <a
               href={tab.link}
-              class="block px-4 py-2 text-sm hover:bg-slate-800 hover:text-violet-400 duration-200"
+              class="block px-4 py-2 text-sm text-center hover:bg-slate-800 hover:text-violet-400 duration-200"
               on:click={(event) => {
                 handleIdClick(event, tab.link); 
                 isMenuOpen = false;
@@ -151,7 +151,7 @@
           {:else}
             <a
               href={tab.link}
-              class="block px-4 py-2 text-sm hover:bg-slate-800 hover:text-violet-400 duration-200"
+              class="block px-4 py-2 text-sm text-center hover:bg-slate-800 hover:text-violet-400 duration-200"
               on:click={() => isMenuOpen = false}
             >
               {tab.name}
@@ -160,12 +160,12 @@
         {/each}
         <button
           on:click={toggleMatrixMode}
-          class="quantico block w-full text-left px-4 py-2 text-sm hover:bg-slate-800 transition"
+          class="quantico block w-full text-center px-4 py-2 text-sm hover:bg-slate-800 transition"
         >
           {#if $matrixMode}
             Matrix Off
           {:else}
-            Matrix Mode
+            Matrix Rain
           {/if}
         </button>
       </div>
