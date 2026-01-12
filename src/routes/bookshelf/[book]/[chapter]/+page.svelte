@@ -2,8 +2,6 @@
 	import { page } from '$app/stores';
 	import MarkdownViewer from '$lib/../components/MarkdownViewer.svelte';
 	import bookshelfData from '$lib/data/bookshelf.json';
-	import MatrixRain from '$lib/../components/matrix/MatrixRain.svelte';
-	import { matrixMode } from '$lib';
 
 	interface ChapterNav {
 		id: string;
@@ -82,10 +80,6 @@
 		}
 	});
 </script>
-
-{#if $matrixMode}
-	<MatrixRain />
-{/if}
 
 <MarkdownViewer
   {markdown}

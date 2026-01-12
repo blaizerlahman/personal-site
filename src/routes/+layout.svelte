@@ -3,6 +3,8 @@
 	import { injectAnalytics } from '@vercel/analytics/sveltekit'
 	import GridBackground from '../components/GridBackground.svelte';
 	import Header from "../components/Header.svelte";
+  import MatrixRain from "../components/matrix/MatrixRain.svelte";
+  import { matrixMode } from '$lib';
 
 	injectAnalytics();
 
@@ -16,6 +18,10 @@
 
 	let { children } = $props();
 </script>
+
+{#if $matrixMode}
+  <MatrixRain />
+{/if}
 
 <div 
 	class="container relative flex flex-col max-w-[1400px] mx-auto w-full text-sm sm:text-base min-h-screen"

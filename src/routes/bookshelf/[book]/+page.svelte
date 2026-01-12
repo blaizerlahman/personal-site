@@ -1,17 +1,11 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import bookshelf from '$lib/data/bookshelf.json';
-  import MatrixRain from '../../../components/matrix/MatrixRain.svelte';
   import TextBox from '$lib/../components/TextBox.svelte';
-  import { matrixMode } from '$lib';
   
   const bookId = $page.params.book;
   const book = bookshelf.books.find(b => b.id === bookId);
 </script>
-
-{#if $matrixMode}
-  <MatrixRain />
-{/if}
 
 <main class="mx-auto max-w-[1000px] px-4 py-8 sm:px-8">
 
