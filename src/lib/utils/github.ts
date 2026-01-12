@@ -20,7 +20,7 @@ export async function fetchGithubFile(filePath: string, raw: boolean = false): P
   }
 
   // don't allow to call with any path besides to book notes
-  if (filePath.startsWith("Development/Tech Books") || filePath.includes("..")) {
+  if (!filePath.startsWith("Development/Tech Books") || filePath.includes("..")) {
     throw new Error("Invalid path.");
   }
 

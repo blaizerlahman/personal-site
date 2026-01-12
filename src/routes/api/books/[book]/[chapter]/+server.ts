@@ -1,4 +1,5 @@
 import { json } from '@sveltejs/kit';
+import { rateLimit } from '#lib/utils/rateLimit';
 import type { RequestHandler } from './$types';
 import { fetchGithubFile } from '#lib/utils/github';
 import bookshelf from '#lib/data/bookshelf.json';
@@ -12,6 +13,17 @@ import bookshelf from '#lib/data/bookshelf.json';
  * @returns {Promise<Response>} JSON response with chapter content and metadata
  */
 export const GET: RequestHandler = async ({ request, params, setHeaders }) => {
+
+  // check rate limiting
+  try {
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0].trim() ?? request.headers.get('cf-connecting-ip') ?? 'unknown';
+    rateLimit(ip);
+  } catch (error) {
+    return json(
+      { error: error.message },
+      { status: 429 }
+    );
+  }
 
 	// unpack params, both should be id's to index into bookshelf
 	const { book: bookId, chapter: chapterId } = params;
