@@ -1,6 +1,8 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import bookshelf from '$lib/data/bookshelf.json';
+  import MatrixRain from '../../../components/matrix/MatrixRain.svelte';
+  import { matrixMode } from '$lib';
   
   interface Chapter {
     id: string;
@@ -18,6 +20,10 @@
   const bookId = $page.params.book;
   const book = bookshelf.books.find(b => b.id === bookId);
 </script>
+
+{#if $matrixMode}
+  <MatrixRain />
+{/if}
 
 <main class="max-w-[800px] mx-auto px-4 py-8">
   {#if book}

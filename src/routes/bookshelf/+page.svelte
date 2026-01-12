@@ -2,6 +2,8 @@
 	import bookshelf from '$lib/data/bookshelf.json';
 	import Bookshelf from '$lib/components/bookshelf/Bookshelf.svelte';
 	import SectionDivider from '../../components/SectionDivider.svelte';
+	import MatrixRain from '../../components/matrix/MatrixRain.svelte';
+	import { matrixMode } from '$lib';
 
 	function handleBookClick(bookId: string) {
 		window.location.href = `/bookshelf/${bookId}`;
@@ -11,6 +13,10 @@
 <svelte:head>
 	<title>Bookshelf | Portfolio</title>
 </svelte:head>
+
+{#if $matrixMode}
+	<MatrixRain />
+{/if}
 
 <main class="mx-auto max-w-[1400px] px-4 py-12 sm:px-8">
 	<SectionDivider name="Bookshelf" id="bookshelf" />
