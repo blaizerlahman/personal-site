@@ -75,6 +75,45 @@ async function getBooksMetadata(): Promise<BooksMetadata> {
 }
 
 /**
+ * Compares chapters based on ascending alphabetical order of titles followed by 
+ * ascending numeric order.
+ *
+ * @param a, b - Chapters to be compared
+ * @returns A positive number if a.title is alphabetically/numerically less than
+ * b.title, a negative number otherwise.
+ */
+function compareChapters(a: Chapter, b: Chapter): number {
+  const aMatch = a.title.match(/^\d+/); 
+  const bMatch = b.title.match(/^\d+/);
+
+  // compare chapter numbers and return ascending order
+  if (aMatch && bMatch) {
+    const aDigits: number = parseInt(aMatch[0], 10);
+    const bDigits: number = parseInt(bMatch[0], 10);
+
+    return aDigits - bDigits;
+  }
+
+  // return whichever is alphabetical if only one is
+  if (aMatch) return 1;
+  if (bMatch) return -1;
+
+  // compare titles normally if both alphabetical
+  return a.title.localeCompare(b.title);
+}
+
+/**
+ * Compares subfolders based on their first chapter. ONLY USE AFTER SORTING CHAPTERS.
+ *
+ * @param a, b - NotesFolders to be compared
+ * @returns A positive number if the first chapter in a.chapters is greater than the 
+ * first chapter in b.chapters, a negative number otherwise.
+ */
+function compareSubfolders(a: NotesFolder, b: NotesFolder): number {
+  return compareChapters(a.chapters[0], b.chapters[0]); 
+}
+
+/**
  * Recursively builds a NotesFolder structure by fetching contents from GitHub.
  *
  * @param notesFolder - The NotesFolder to populate (must have githubPath set)
@@ -117,6 +156,12 @@ async function buildNotesFolder(notesFolder: NotesFolder, bookPath: string): Pro
 			}
 		}
 	}
+
+  // sort chapters by alphabetical first then digits in ascending order
+  notesFolder.chapters.sort(compareChapters);
+
+  // sort subfolders by their first chapter
+  notesFolder.subfolders.sort(compareSubfolders);
 }
 
 /**
@@ -234,6 +279,12 @@ async function generateBookshelf() {
 					}
 				}
 			}
+
+      // sort chapters by alphabetical order and then numeric order ascending
+      bookNotes.chapters.sort(compareChapters);
+
+      // sort subfolders by their first chapter
+      bookNotes.subfolders.sort(compareSubfolders);
 
 			books.push(bookNotes);
 
