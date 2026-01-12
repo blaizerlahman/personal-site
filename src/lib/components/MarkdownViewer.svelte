@@ -10,12 +10,13 @@
 	interface Props {
 		markdown: string;
 		bookId: string;
+		title?: string;
 		prevChapter?: ChapterNav;
 		nextChapter?: ChapterNav;
 		backLink?: string;
 	}
 
-	let { markdown, bookId, prevChapter, nextChapter, backLink }: Props = $props();
+	let { markdown, bookId, title, prevChapter, nextChapter, backLink }: Props = $props();
 
 	function highlightCode(code: string, lang: string): string {
 		if (lang && hljs.getLanguage(lang)) {
@@ -52,6 +53,10 @@
 		>
 			← Back to Table of Contents
 		</a>
+	{/if}
+
+	{#if title}
+		<h1 class="poppins mb-8 text-3xl font-semibold text-white">{title}</h1>
 	{/if}
 
 	<article class="prose-viola">
