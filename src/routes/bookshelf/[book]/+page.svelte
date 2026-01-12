@@ -12,7 +12,15 @@
   <MatrixRain />
 {/if}
 
-<main class="max-w-[800px] mx-auto px-4 py-8">
+<main class="mx-auto max-w-[1000px] px-4 py-8 sm:px-8">
+
+  <a
+    href="/bookshelf"
+    class="mb-6 inline-block text-violet-400 transition-colors duration-200 hover:text-violet-300"
+  >
+    ← Back to Bookshelf
+  </a>
+
   {#if book}
     <h1 class="text-4xl font-bold mb-2">{book.title}</h1>
     <p class="text-gray-400 mb-8">by {book.author}</p>
