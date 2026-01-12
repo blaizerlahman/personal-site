@@ -6,15 +6,17 @@
 			"spineColor": "#8B5CF6",
 			"textColor": "#FFFFFF",
 			"description": "The Backend Bible",
-			"githubPath": "Development/Tech Books/Designing Data-Intensive Applications"
+			"githubPath": "Development/Tech Books/Designing Data-Intensive Applications",
+			"width": "60px"
 		},
 		"operating-systems-three-easy-pieces": {
 			"title": "Operating Systems - Three Easy Pieces",
 			"author": "Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau",
 			"spineColor": "#7C3AED",
 			"textColor": "#FFFFFF",
-      "description": "My favorite textbook for my favorite course (so far)",
-			"githubPath": "Development/Tech Books/Operating Systems - Three Easy Pieces"
+			"description": "My favorite textbook for my favorite course (so far)",
+			"githubPath": "Development/Tech Books/Operating Systems - Three Easy Pieces",
+			"width": "60px"
 		},
 		"design-patterns-elements-of-reusable-object-oriented-software": {
 			"title": "Design Patterns - Elements of Reusable Object-Oriented Software",
@@ -22,7 +24,8 @@
 			"spineColor": "#90D5FF",
 			"textColor": "#FFFFFF",
 			"description": "The OOP Bible",
-			"githubPath": "Development/Tech Books/Design Patterns - Elements of Reusable Object-Oriented Software"
+			"githubPath": "Development/Tech Books/Design Patterns - Elements of Reusable Object-Oriented Software",
+			"width": "60px"
 		},
 		"a-tour-of-c-plus-plus": {
 			"title": "A Tour of C++",
@@ -30,7 +33,8 @@
 			"spineColor": "#FF474D",
 			"textColor": "#FFFFFF",
 			"description": "For making myself learn C++",
-			"githubPath": "Development/Tech Books/A Tour of C++"
+			"githubPath": "Development/Tech Books/A Tour of C++",
+			"width": "60px"
 		}
 	}
 }
