@@ -1,70 +1,91 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { page } from '$app/stores';
-  import { marked } from 'marked';
-  import hljs from 'highlight.js';
+	import { page } from '$app/stores';
+	import MarkdownViewer from '$lib/components/MarkdownViewer.svelte';
+	import bookshelfData from '$lib/data/bookshelf.json';
 
-  const bookId = $page.params.book;
-  const chapterId = $page.params.chapter;
+	interface ChapterNav {
+		id: string;
+		title: string;
+	}
 
-  let loading = $state(true);
-  let err   = $state<string | null>(null);
-  let markdown = $state('');
+	const bookId = $derived($page.params.book);
+	const chapterId = $derived($page.params.chapter);
 
-  // configure marked
-  marked.setOptions({
-    highlight: (code, lang) => {
-      if (lang && hljs.getLanguage(lang)) {
-        return hljs.highlight(code, { language: lang }).value;
-      }
+	let loading = $state(true);
+	let err = $state<string | null>(null);
+	let markdown = $state('');
+	let currentTitle = $state('');
+	let prevChapter = $state<ChapterNav | undefined>();
+	let nextChapter = $state<ChapterNav | undefined>();
 
-      return hljs.highlightAuto(code).value;
+	async function loadChapter(bId: string, cId: string) {
+		loading = true;
+		err = null;
 
-    },
-    breaks: true,
-    gfm: true
-  });
+		try {
+			const nav = findChapterNavigation(bId, cId);
+			prevChapter = nav.prev;
+			nextChapter = nav.next;
+			currentTitle = nav.current?.title || '';
 
-  onMount(async () => {
-    try {
-      
-      // get markdown note
-      const resp = await fetch(`/api/books/${bookId}/${chapterId}`);
-      const data = await resp.json();
-      
-      console.log('API Response:', data);  
-      console.log('data.markdown type:', typeof data.markdown); 
-      console.log('data.markdown value:', data.markdown);
+			const resp = await fetch(`/api/books/${bId}/${cId}`);
+			const data = await resp.json();
 
-      if (!resp.ok) {
-        throw new Error(data.error || `Failed to fetch book ${bookId} chapter ${chapterId}: $resp.statusText`);
-      }
+			if (!resp.ok) {
+				throw new Error(
+					data.error || `Failed to fetch book ${bId} chapter ${cId}: ${resp.statusText}`
+				);
+			}
 
-      markdown = marked(data.markdown);
-    } catch (error) {
-      err = error instanceof Error ? error.message : 'Unknown error';
-    }
+			markdown = data.markdown;
+		} catch (error) {
+			err = error instanceof Error ? error.message : 'Unknown error';
+		}
 
-    loading = false;
-  });
+		loading = false;
+	}
+
+	function findChapterNavigation(
+		bId: string,
+		cId: string
+	): { current?: ChapterNav; prev?: ChapterNav; next?: ChapterNav } {
+		const book = bookshelfData.books.find((b) => b.id === bId);
+		if (!book) return {};
+
+		const allChapters: ChapterNav[] = [];
+
+		if (book.chapters) {
+			allChapters.push(...book.chapters.map((c) => ({ id: c.id, title: c.title })));
+		}
+
+		for (const subfolder of book.subfolders || []) {
+			if (subfolder.chapters) {
+				allChapters.push(...subfolder.chapters.map((c) => ({ id: c.id, title: c.title })));
+			}
+		}
+
+		const currentIndex = allChapters.findIndex((c) => c.id === cId);
+		if (currentIndex === -1) return {};
+
+		return {
+			current: allChapters[currentIndex],
+			prev: currentIndex > 0 ? allChapters[currentIndex - 1] : undefined,
+			next: currentIndex < allChapters.length - 1 ? allChapters[currentIndex + 1] : undefined
+		};
+	}
+
+	$effect(() => {
+		if (bookId && chapterId) {
+			loadChapter(bookId, chapterId);
+		}
+	});
 </script>
 
-<svelte:head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css"/>
-</svelte:head>
-
-<main class="max-w-[800px] mx-auto px-4 py-8">
-  <a href="/bookshelf/{bookId}" class="text-violet-400 hover:text-violet-300 mb-4 inline-block">
-    ← Back to Table of Contents
-  </a>
-  
-  {#if loading}
-    <p>Loading chapter...</p>
-  {:else if err}
-    <p class="text-red-400">Error: {err}</p>
-  {:else}
-    <article class="prose prose-invert max-w-none">
-      {@html markdown}
-    </article>
-  {/if}
-</main>
+<MarkdownViewer
+	{markdown}
+	{bookId}
+	title={currentTitle}
+	{prevChapter}
+	{nextChapter}
+	backLink="/bookshelf/{bookId}"
+/>

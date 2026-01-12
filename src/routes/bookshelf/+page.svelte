@@ -1,24 +1,25 @@
 <script lang="ts">
-  import bookshelf from '$lib/data/bookshelf.json';
+	import bookshelf from '$lib/data/bookshelf.json';
+	import Bookshelf from '$lib/components/bookshelf/Bookshelf.svelte';
+	import SectionDivider from '../../components/SectionDivider.svelte';
+
+	function handleBookClick(bookId: string) {
+		window.location.href = `/bookshelf/${bookId}`;
+	}
 </script>
 
-<main class="max-w-[800px] mx-auto px-4 py-8">
-  <h1 class="text-4xl font-bold mb-8">Bookshelf</h1>
-  
-  <ul class="space-y-4">
-    {#each bookshelf.books as book}
-      <li>
-        <a 
-          href="/bookshelf/{book.id}"
-          class="text-lg text-violet-400 hover:text-violet-300"
-        >
-          {book.title}
-        </a>
-        <p class="text-gray-400 text-sm">by {book.author}</p>
-        <p class="text-gray-500 text-xs">
-          {book.chapters.length} root chapters, {book.subfolders.length} folders
-        </p>
-      </li>
-    {/each}
-  </ul>
+<svelte:head>
+	<title>Bookshelf | Portfolio</title>
+</svelte:head>
+
+<main class="mx-auto max-w-[1400px] px-4 py-12 sm:px-8">
+	<SectionDivider name="Bookshelf" id="bookshelf" />
+
+	<div class="mb-12 text-center">
+		<p class="mx-auto max-w-lg text-gray-400">
+			A collection of technical books I've read and taken notes from. 
+		</p>
+	</div>
+
+	<Bookshelf books={bookshelf.books} onBookClick={handleBookClick} />
 </main>
