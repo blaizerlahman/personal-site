@@ -112,12 +112,12 @@
     <button
       on:click={() => matrixMode.update(n => !n)}
       class="quantico px-3 py-1 rounded bg-slate-800 hover:bg-slate-700 transition whitespace-nowrap"
-      aria-label="Toggle Matrix Mode"
+      aria-label="Toggle Matrix Rain"
     >
       {#if $matrixMode}
         Matrix Off
       {:else}
-        Matrix Mode
+        Matrix Rain
       {/if}
     </button>
   </div>
