@@ -4,19 +4,6 @@
   import MatrixRain from '../../../components/matrix/MatrixRain.svelte';
   import { matrixMode } from '$lib';
   
-  interface Chapter {
-    id: string;
-    title: string;
-    file: string;
-  }
-  
-  interface NotesFolder {
-    title: string;
-    githubPath: string;
-    chapters: Chapter[];
-    subfolders: NotesFolder[];
-  }
-  
   const bookId = $page.params.book;
   const book = bookshelf.books.find(b => b.id === bookId);
 </script>

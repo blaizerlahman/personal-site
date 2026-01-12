@@ -38,7 +38,6 @@
 
 	function handleMouseEnter() {
 		if (trigger === 'hover' || trigger === 'both') {
-			// Clear any pending timeout to prevent the book from closing
 			if (hoverTimeout) {
 				clearTimeout(hoverTimeout);
 				hoverTimeout = null;
@@ -49,7 +48,6 @@
 
 	function handleMouseLeave() {
 		if (trigger === 'hover' || trigger === 'both') {
-			// Add a small delay before removing hover state to prevent jiggling
 			hoverTimeout = setTimeout(() => {
 				isHovered = false;
 				hoverTimeout = null;

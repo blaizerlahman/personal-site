@@ -22,11 +22,8 @@
 	let titleElement: HTMLElement;
 	let hasOverflow = $state(false);
 
-	// Check for overflow after the component renders
 	$effect(() => {
 		if (titleElement) {
-			// For vertical text, we need to check if scrollWidth > clientWidth
-			// because writing-mode: vertical-rl rotates the overflow direction
 			hasOverflow = titleElement.scrollWidth > titleElement.clientWidth;
 		}
 	});

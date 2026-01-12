@@ -11,7 +11,7 @@
 </script>
 
 <svelte:head>
-	<title>Bookshelf | Portfolio</title>
+	<title>Bookshelf</title>
 </svelte:head>
 
 {#if $matrixMode}
