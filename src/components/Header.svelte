@@ -61,7 +61,7 @@
   
   <div class="flex items-center gap-4">
     <h1 class="font-medium">
-      <b class="font-bold poppins">Blaize Lahman</b> 
+      <a href="/"><b class="font-bold poppins">Blaize Lahman</b></a>
     </h1>
 
     <button

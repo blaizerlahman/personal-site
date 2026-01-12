@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import MarkdownViewer from '$lib/components/MarkdownViewer.svelte';
+	import MarkdownViewer from '$lib/../components/MarkdownViewer.svelte';
 	import bookshelfData from '$lib/data/bookshelf.json';
-	import MatrixRain from '../../../../components/matrix/MatrixRain.svelte';
+	import MatrixRain from '$lib/../components/matrix/MatrixRain.svelte';
 	import { matrixMode } from '$lib';
 
 	interface ChapterNav {
@@ -88,10 +88,10 @@
 {/if}
 
 <MarkdownViewer
-	{markdown}
-	{bookId}
-	title={currentTitle}
-	{prevChapter}
-	{nextChapter}
-	backLink="/bookshelf/{bookId}"
+  {markdown}
+  {bookId}
+  title={currentTitle}
+  {prevChapter}
+  {nextChapter}
+  backLink="/bookshelf/{bookId}"
 />

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { marked } from 'marked';
 	import hljs from 'highlight.js';
+  import TextBox from './TextBox.svelte';
 
 	interface ChapterNav {
 		id: string;
@@ -61,7 +62,9 @@
 
 	<article class="prose-viola">
 		{#if markdown}
-			{@html renderedMarkdown}
+      <TextBox>
+        {@html renderedMarkdown}
+      </TextBox>
 		{:else}
 			<div class="animate-pulse space-y-4">
 				<div class="h-8 w-3/4 rounded bg-slate-800"></div>

@@ -3,7 +3,7 @@
 		"designing-data-intensive-applications": {
 			"title": "Designing Data-Intensive Applications",
 			"author": "Martin Kleppmann",
-			"spineColor": "#8B5CF6",
+			"spineColor": "#FF474D",
 			"textColor": "#FFFFFF",
 			"description": "The Backend Bible",
 			"githubPath": "Development/Tech Books/Designing Data-Intensive Applications",

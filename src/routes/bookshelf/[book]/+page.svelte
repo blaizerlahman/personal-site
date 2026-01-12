@@ -2,6 +2,7 @@
   import { page } from '$app/stores';
   import bookshelf from '$lib/data/bookshelf.json';
   import MatrixRain from '../../../components/matrix/MatrixRain.svelte';
+  import TextBox from '$lib/../components/TextBox.svelte';
   import { matrixMode } from '$lib';
   
   const bookId = $page.params.book;
@@ -29,31 +30,11 @@
     
     <h2 class="text-2xl font-bold mb-4">Table of Contents</h2>
     
-    <!-- Root-level chapters -->
     {#if book.chapters.length > 0}
-      <ol class="space-y-2 mb-6">
-        {#each book.chapters as chapter}
-          <li>
-            <a 
-              href="/bookshelf/{book.id}/{chapter.id}"
-              class="text-violet-400 hover:text-violet-300"
-            >
-              {chapter.title}
-            </a>
-          </li>
-        {/each}
-      </ol>
-    {/if}
-    
-    <!-- Subfolders (recursive rendering - simplified for Phase 2) -->
-    {#each book.subfolders as folder}
       <div class="mb-6">
-        <h3 class="text-xl font-bold mb-2">{folder.title}</h3>
-        
-        <!-- Chapters in this folder -->
-        {#if folder.chapters.length > 0}
-          <ol class="space-y-2 ml-4">
-            {#each folder.chapters as chapter}
+        <TextBox>
+          <ol class="space-y-2">
+            {#each book.chapters as chapter}
               <li>
                 <a 
                   href="/bookshelf/{book.id}/{chapter.id}"
@@ -64,24 +45,48 @@
               </li>
             {/each}
           </ol>
-        {/if}
+        </TextBox>
+      </div>
+    {/if}
+    
+    {#each book.subfolders as folder}
+      <div class="mb-6">
+        <h3 class="text-xl font-bold mb-2">{folder.title}</h3>
         
-        <!-- Nested subfolders (show one level for Phase 2) -->
-        {#each folder.subfolders as subfolder}
-          <div class="ml-4 mt-2">
-            <h4 class="font-semibold">{subfolder.title}</h4>
-            <ol class="space-y-1 ml-4">
-              {#each subfolder.chapters as chapter}
+        {#if folder.chapters.length > 0}
+          <TextBox>
+            <ol class="space-y-2 ml-4">
+              {#each folder.chapters as chapter}
                 <li>
                   <a 
                     href="/bookshelf/{book.id}/{chapter.id}"
-                    class="text-violet-400 hover:text-violet-300 text-sm"
+                    class="text-violet-400 hover:text-violet-300"
                   >
                     {chapter.title}
                   </a>
                 </li>
               {/each}
             </ol>
+          </TextBox>
+        {/if}
+        
+        {#each folder.subfolders as subfolder}
+          <div class="ml-4 mt-2">
+            <h4 class="font-semibold">{subfolder.title}</h4>
+            <TextBox>
+              <ol class="space-y-1 ml-4">
+                {#each subfolder.chapters as chapter}
+                  <li>
+                    <a 
+                      href="/bookshelf/{book.id}/{chapter.id}"
+                      class="text-violet-400 hover:text-violet-300 text-sm"
+                    >
+                      {chapter.title}
+                    </a>
+                  </li>
+                {/each}
+              </ol>
+            </TextBox>
           </div>
         {/each}
       </div>
