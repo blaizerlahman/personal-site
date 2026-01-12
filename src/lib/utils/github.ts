@@ -19,6 +19,11 @@ export async function fetchGithubFile(filePath: string, raw: boolean = false): P
     throw new Error("Github repository or owner variable not provided.");
   }
 
+  // don't allow to call with any path besides to book notes
+  if (filePath.startsWith("Development/Tech Books") || filePath.includes("..")) {
+    throw new Error("Invalid path.");
+  }
+
   const url = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
 
   // fetches either raw text or json representation of file
@@ -30,7 +35,7 @@ export async function fetchGithubFile(filePath: string, raw: boolean = false): P
   });
 
   if (!resp.ok) {
-    throw new Error(`Github API error for ${filePath}: ${resp.status} ${resp.statusText}`);
+    throw new Error("Github API error when fetching content");
   }
   
   // return text if raw specified else return JSON object
