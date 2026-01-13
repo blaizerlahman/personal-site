@@ -11,7 +11,7 @@
         double majoring in Computer Science and Data Science and pursuing a certificate in Economic Analytics.
         <br><br>
         I have been coding seriously since 2023, and my current programming interests include terminal apps,
-        analytic and cybersecurity tools, and basically anything that can help people. 
+        analytic tools, open source, and basically anything that can provide a service to people.
         <br><br>
         As far as development work goes, I am an incoming Software Engineer Intern on the Dell CSG team,
         where I will work during Summer 2026. I also work for the

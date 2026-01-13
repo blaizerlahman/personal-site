@@ -57,9 +57,6 @@
 	>
 		<div class="flex-1 space-y-8 text-left">
 			<div class="space-y-4">
-				<h1 class="text-4xl sm:text-5xl font-bold leading-tight">
-					Contact Me
-				</h1>
         <TextBox>
           <p class="text-lg">
             {contactInfo.description}

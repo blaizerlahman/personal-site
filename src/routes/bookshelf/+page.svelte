@@ -24,7 +24,7 @@
           A collection of technical books I've read and the notes I've taken on them. My notetaking
           style is basically just slightly rephrasing whatever is on the page, so don't expect these to
           be groundbreaking or anything. I mainly keep them here as a means to revisit them from my
-          phone or another device if I don't have my normal machine.
+          phone or another device if I don't have my normal machine (and to have a personal Obsidian Sync).
         </p>
       </div>
     </TextBox>

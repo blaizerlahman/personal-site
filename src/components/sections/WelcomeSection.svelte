@@ -10,8 +10,8 @@
         Hey, welcome to my site!
         <br><br>
         This serves as a personal website to showcase some of my projects, 
-        provide a digital resume, and give updates on my journey as a developer
-        (and also try out some nerdy stuff, check out Matrix Mode!)
+        provide a digital resume, and give updates on my journey as a developer.
+        Also I plan to use it to test out some mini-projects (like Bookshelf).
       </TextBox>
     </div>
   </section>
