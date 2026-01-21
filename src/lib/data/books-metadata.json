@@ -35,6 +35,15 @@
 			"description": "For making myself learn C++",
 			"githubPath": "Development/Tech Books/A Tour of C++",
 			"width": "60px"
-		}
+		},
+    "computer-networks-a-systems-approach": {
+      "title": "Computer Networks - A Systems Approach",
+      "author": "Larry Peterson and Bruce Davie",
+      "spineColor": "#00674F",
+      "textColor": "#FFFFFF",
+      "description": "Textbook for CS640 - Intro to Networking",
+      "githubPath": "Development/Tech Books/Computer Networks - A Systems Approach",
+      "width": "60px"
+    }
 	}
 }
