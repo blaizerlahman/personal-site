@@ -13,7 +13,7 @@
 		title,
 		spineColor,
 		textColor,
-		width = '60px',
+		width,
 		height = '200px',
 		isHovered = false,
 		isPulled = false
@@ -152,7 +152,7 @@
 
 	@media (max-width: 640px) {
 		.book-spine {
-			width: 50px;
+			/* width: calc(var(--width) * 0.8); */
 			height: 160px;
 		}
 

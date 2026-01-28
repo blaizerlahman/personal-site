@@ -9,6 +9,7 @@ interface BookMetadata {
 	textColor: string;
   description: string;
 	githubPath: string;
+  width: string;
 }
 
 interface BooksMetadata {
@@ -30,6 +31,7 @@ interface BookNotes {
   textColor: string;
   description: string;
 	githubPath: string;
+  width: string;
 	chapters: Chapter[];
 	subfolders: NotesFolder[];
 }
@@ -244,6 +246,7 @@ async function generateBookshelf() {
         textColor: bookMetadata.textColor,
         description: bookMetadata.description,
 				githubPath: bookMetadata.githubPath,
+        width: bookMetadata.width,
 				chapters: [],
 				subfolders: []
 			};

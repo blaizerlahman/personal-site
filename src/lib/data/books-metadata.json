@@ -7,7 +7,7 @@
 			"textColor": "#FFFFFF",
 			"description": "The Backend Bible",
 			"githubPath": "Development/Tech Books/Designing Data-Intensive Applications",
-			"width": "60px"
+			"width": "50px"
 		},
 		"operating-systems-three-easy-pieces": {
 			"title": "Operating Systems - Three Easy Pieces",
@@ -25,7 +25,7 @@
 			"textColor": "#FFFFFF",
 			"description": "The OOP Bible",
 			"githubPath": "Development/Tech Books/Design Patterns - Elements of Reusable Object-Oriented Software",
-			"width": "60px"
+			"width": "50px"
 		},
 		"a-tour-of-c-plus-plus": {
 			"title": "A Tour of C++",
@@ -34,7 +34,7 @@
 			"textColor": "#FFFFFF",
 			"description": "For making myself learn C++",
 			"githubPath": "Development/Tech Books/A Tour of C++",
-			"width": "60px"
+			"width": "35px"
 		},
     "computer-networks-a-systems-approach": {
       "title": "Computer Networks - A Systems Approach",
@@ -43,7 +43,16 @@
       "textColor": "#FFFFFF",
       "description": "Textbook for CS640 - Intro to Networking",
       "githubPath": "Development/Tech Books/Computer Networks - A Systems Approach",
-      "width": "60px"
+      "width": "65px"
+    },
+    "database-system-concepts": {
+      "title": "Database System Concepts",
+      "author": "Abraham Silberschatz, Henry F. Korth, and S. Sudarshan",
+      "spineColor": "#D3D3D3",
+      "textColor": "#000000",
+      "description": "Database systems Bible and also resource for CS564 - Database Management Systems",
+      "githubPath": "Development/Tech Books/Database System Concepts",
+      "width": "65px"
     }
 	}
 }
