@@ -52,124 +52,126 @@
   
 <header
   class={
-    "sticky z-[10] top-0 duration-300 px-6 flex items-center justify-between border-b border-solid " +
+    "sticky z-[10] top-0 duration-300 border-b border-solid " +
     (y > 0
       ? " py-4 bg-slate-950 border-violet-950"
       : " py-6 bg-transparent border-transparent")
   }
 >
   
-  <div class="flex items-center gap-4">
-    <h1 class="font-medium whitespace-nowrap">
-      <a href="/"><b class="font-bold poppins">Blaize Lahman</b></a>
-    </h1>
+  <div class="max-w-[1400px] mx-auto px-6 flex items-center justify-between">
+    <div class="flex items-center gap-4">
+      <h1 class="font-medium whitespace-nowrap">
+        <a href="/"><b class="font-bold poppins">Blaize Lahman</b></a>
+      </h1>
 
-    <button
-      on:click={downloadResume}
-      class="flex items-center gap-2 px-3 py-1 rounded bg-violet-800 hover:bg-violet-700 transition duration-200 text-white whitespace-nowrap"
-      aria-label="Download Resume"
-    >
-      Resume
-      <svg 
-        width="16" 
-        height="16" 
-        viewBox="0 0 24 24" 
-        fill="none" 
-        stroke="currentColor" 
-        stroke-width="2" 
-        stroke-linecap="round" 
-        stroke-linejoin="round"
+      <button
+        on:click={downloadResume}
+        class="flex items-center gap-2 px-3 py-1 rounded bg-violet-800 hover:bg-violet-700 transition duration-200 text-white whitespace-nowrap"
+        aria-label="Download Resume"
       >
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-        <polyline points="7,10 12,15 17,10"/>
-        <line x1="12" y1="15" x2="12" y2="3"/>
-      </svg>
-    </button>
-  </div>
-
-  <div class="md:flex items-center gap-4 hidden">
-    {#each tabs as tab, index}
-      {#if tab.name === "About Me" || tab.name === "Contact" || tab.name === "Projects"}
-        <a
-          href={tab.link}
-          class="duration-200 hover:text-violet-400 whitespace-nowrap"
-          on:click={(event) => handleIdClick(event, tab.link)}
+        Resume
+        <svg 
+          width="16" 
+          height="16" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          stroke-width="2" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
         >
-          <p>{tab.name}</p>
-        </a>
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7,10 12,15 17,10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+      </button>
+    </div>
 
-      {:else}
-        <a
-          href={tab.link}
-          class="duration-200 hover:text-violet-400 whitespace-nowrap"
-          target={index === 2 ? "_blank" : ""}
-        >
-          <p>{tab.name}</p>
-        </a>
+    <div class="md:flex items-center gap-4 hidden">
+      {#each tabs as tab, index}
+        {#if tab.name === "About Me" || tab.name === "Contact" || tab.name === "Projects"}
+          <a
+            href={tab.link}
+            class="duration-200 hover:text-violet-400 whitespace-nowrap"
+            on:click={(event) => handleIdClick(event, tab.link)}
+          >
+            <p>{tab.name}</p>
+          </a>
+
+        {:else}
+          <a
+            href={tab.link}
+            class="duration-200 hover:text-violet-400 whitespace-nowrap"
+            target={index === 2 ? "_blank" : ""}
+          >
+            <p>{tab.name}</p>
+          </a>
+        {/if}
+      {/each}
+
+      <button
+        on:click={() => matrixMode.update(n => !n)}
+        class="quantico px-3 py-1 rounded bg-slate-800 hover:bg-slate-700 transition whitespace-nowrap"
+        aria-label="Toggle Matrix Rain"
+      >
+        {#if $matrixMode}
+          Matrix Off
+        {:else}
+          Matrix Rain
+        {/if}
+      </button>
+    </div>
+
+    <!--mobile dropdown menu-->
+    <div class="md:hidden relative">
+      <button
+        on:click={toggleMenu}
+        class="flex flex-col justify-center items-center w-8 h-8 space-y-1 focus:outline-none"
+        aria-label="Toggle menu"
+      >
+        <span class="block w-6 h-0.5 bg-current duration-300"></span>
+        <span class="block w-6 h-0.5 bg-current duration-300"></span>
+        <span class="block w-6 h-0.5 bg-current duration-300"></span>
+      </button>
+
+      {#if isMenuOpen}
+        <div class="absolute right-0 top-full mt-2 w-34 bg-slate-900 rounded-lg shadow-lg border border-violet-950 py-2 z-20">
+          {#each tabs as tab}
+            {#if tab.name === "About Me" || tab.name === "Contact" || tab.name === "Projects"}
+              <a
+                href={tab.link}
+                class="block px-4 py-2 text-sm text-center hover:bg-slate-800 hover:text-violet-400 duration-200"
+                on:click={(event) => {
+                  handleIdClick(event, tab.link); 
+                  isMenuOpen = false;
+                }}
+              >
+                {tab.name}
+              </a>
+            {:else}
+              <a
+                href={tab.link}
+                class="block px-4 py-2 text-sm text-center hover:bg-slate-800 hover:text-violet-400 duration-200"
+                on:click={() => isMenuOpen = false}
+              >
+                {tab.name}
+              </a>
+            {/if}
+          {/each}
+          <button
+            on:click={toggleMatrixMode}
+            class="quantico block w-full text-center px-4 py-2 text-sm hover:bg-slate-800 transition"
+          >
+            {#if $matrixMode}
+              Matrix Off
+            {:else}
+              Matrix Rain
+            {/if}
+          </button>
+        </div>
       {/if}
-    {/each}
-
-    <button
-      on:click={() => matrixMode.update(n => !n)}
-      class="quantico px-3 py-1 rounded bg-slate-800 hover:bg-slate-700 transition whitespace-nowrap"
-      aria-label="Toggle Matrix Rain"
-    >
-      {#if $matrixMode}
-        Matrix Off
-      {:else}
-        Matrix Rain
-      {/if}
-    </button>
-  </div>
-
-  <!--mobile dropdown menu-->
-  <div class="md:hidden relative">
-    <button
-      on:click={toggleMenu}
-      class="flex flex-col justify-center items-center w-8 h-8 space-y-1 focus:outline-none"
-      aria-label="Toggle menu"
-    >
-      <span class="block w-6 h-0.5 bg-current duration-300"></span>
-      <span class="block w-6 h-0.5 bg-current duration-300"></span>
-      <span class="block w-6 h-0.5 bg-current duration-300"></span>
-    </button>
-
-    {#if isMenuOpen}
-      <div class="absolute right-0 top-full mt-2 w-34 bg-slate-900 rounded-lg shadow-lg border border-violet-950 py-2 z-20">
-        {#each tabs as tab}
-          {#if tab.name === "About Me" || tab.name === "Contact" || tab.name === "Projects"}
-            <a
-              href={tab.link}
-              class="block px-4 py-2 text-sm text-center hover:bg-slate-800 hover:text-violet-400 duration-200"
-              on:click={(event) => {
-                handleIdClick(event, tab.link); 
-                isMenuOpen = false;
-              }}
-            >
-              {tab.name}
-            </a>
-          {:else}
-            <a
-              href={tab.link}
-              class="block px-4 py-2 text-sm text-center hover:bg-slate-800 hover:text-violet-400 duration-200"
-              on:click={() => isMenuOpen = false}
-            >
-              {tab.name}
-            </a>
-          {/if}
-        {/each}
-        <button
-          on:click={toggleMatrixMode}
-          class="quantico block w-full text-center px-4 py-2 text-sm hover:bg-slate-800 transition"
-        >
-          {#if $matrixMode}
-            Matrix Off
-          {:else}
-            Matrix Rain
-          {/if}
-        </button>
-      </div>
-    {/if}
+    </div>
   </div>
 </header>
   
