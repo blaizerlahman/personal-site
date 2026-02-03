@@ -1,10 +1,10 @@
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async ({ request, fetch }) => {
-
+  
   // only allow endpoint to be used by cron job
-  if (request.headers.get('x-vercel-cron') !== '1') {
-    return new Response('Forbidden', { status: 403 });
+  if (request.headers.get('authorization') !== `Bearer ${process.env.CRON_SECRET}`) {
+    return new Response('Unauthorized', { status: 401 });
   }
 
   const hookURL = process.env.DEPLOY_HOOK_URL;
