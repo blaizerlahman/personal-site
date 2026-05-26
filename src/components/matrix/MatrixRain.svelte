@@ -10,7 +10,7 @@
     'REACT', 'POSTGRESQL', 'SQL', 'PYTHON',
     'JAVA', 'GOLANG', 'FULLSTACK', 'DOCKER',
     'LAMBDA', 'PANDAS', 'BACKEND', 'GIT',
-    'NEXT', 'REST', 'SVELTE', 'TAILWIND'
+    'NEXT', 'REST', 'SVELTE', 'TAILWIND', 'C++'
   ];
 
   const fontSize = 20;
