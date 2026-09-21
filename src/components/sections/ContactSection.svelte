@@ -1,6 +1,5 @@
 <script lang="ts">
   import TextBox from '../TextBox.svelte';
-	import FloatingBlobImage from '../FloatingBlobImage.svelte';
 	import { matrixMode } from '$lib';
 	import AolImageLoader from '../matrix/AOLImageLoader.svelte';
 	
@@ -103,10 +102,12 @@
 
 		<div class="blob-container relative shrink-0 w-[18rem] h-[18rem] md:w-[20rem] md:h-[20rem] mx-auto">
 			{#if !$matrixMode}
-				<FloatingBlobImage 
-          src="/images/composite_headshot.jpg" 
-          alt="Headshot of Blaize Lahman"
-          className="w-full h-full rounded-full border-6 object-cover object-center shadow-lg" />
+				<img
+					src="/images/composite_headshot.jpg"
+					alt="Headshot of Blaize Lahman"
+					loading="lazy"
+					class="w-full h-full rounded-full border-6 border-violet-700 object-cover object-center shadow-lg"
+				/>
 			{:else}
 				<AolImageLoader
 					src="/images/dithered_composite_headshot.jpeg"
