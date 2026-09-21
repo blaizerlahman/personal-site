@@ -30,6 +30,8 @@
         imageAlt="Football Icon"
         description="A college football prediction model that successfully predicted games in the 2024 season at a 54.5% win rate against the spread."
         tools={["Python", "pandas", "NumPy", "Scikit-learn", "Matplotlib", "Selenium"]}
+        projectPath="/cfb-model"
+        projectLabel="Try the Model"
         githubUrl="https://github.com/blaizerlahman/CFB-Model"
       />
       <LandingProjectCard

@@ -9,17 +9,21 @@
     description: string;
     tools?: string[];
     projectUrl?: string;
+    projectPath?: string;
+    projectLabel?: string;
     githubUrl?: string;
   }
-  
-  let { 
-    name, 
-    imageSrc, 
-    imageAlt, 
-    description, 
-    tools = [], 
-    projectUrl, 
-    githubUrl 
+
+  let {
+    name,
+    imageSrc,
+    imageAlt,
+    description,
+    tools = [],
+    projectUrl,
+    projectPath,
+    projectLabel = 'Visit Site',
+    githubUrl
   }: Props = $props();
 </script>
 
@@ -59,10 +63,10 @@
       </div>
     {/if}
     
-    {#if projectUrl || githubUrl}
+    {#if projectUrl || projectPath || githubUrl}
       <div class="flex gap-2 pt-2">
         {#if projectUrl}
-          <a 
+          <a
             href={projectUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -70,10 +74,19 @@
                    bg-violet-600 hover:bg-violet-500 text-white rounded-md
                    transition-colors duration-200 hover:shadow-md"
           >
-            Visit Site
+            {projectLabel}
+          </a>
+        {:else if projectPath}
+          <a
+            href={projectPath}
+            class="flex-1 px-3 py-1.5 text-center text-xs font-medium
+                   bg-violet-600 hover:bg-violet-500 text-white rounded-md
+                   transition-colors duration-200 hover:shadow-md"
+          >
+            {projectLabel}
           </a>
         {/if}
-        
+
         {#if githubUrl}
           <a 
             href={githubUrl}

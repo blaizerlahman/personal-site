@@ -12,6 +12,7 @@
     { name: "Projects", link: "#projects" },
     // { name: "What's Going On", link: "/now" },
     { name: "Contact", link: "#contact" },
+    { name: "CFB Model", link: "/cfb-model" },
     { name: "Bookshelf", link: "/bookshelf" },
   ];
 
