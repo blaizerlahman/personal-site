@@ -19,7 +19,7 @@
         name="EnrollAlert"
         imageSrc="/images/enrollalert_logo_transparent.png"
         imageAlt="EnrollAlert Logo"
-        description="A course enrollment tool for UW-Madison students that sends user-specified notifications for course openings. Currently serves more than 200 UW-Madison students and 600+ active alerts."
+        description="A course enrollment tool for UW-Madison students that sends user-specified notifications for course openings. Currently serves more than 400 UW-Madison students and 600+ active alerts."
         tools={["TypeScript", "Go", "Next.js", "PostgreSQL", "AWS Lambda", "AWS SES", "Vercel"]}
         projectUrl="https://enrollalert.com"
         githubUrl="https://github.com/blaizerlahman/enroll-alert"
@@ -28,8 +28,8 @@
         name="College Football Model"
         imageSrc="/images/football_graphic.png"
         imageAlt="Football Icon"
-        description="A college football prediction model that successfully predicted games in the 2024 season at a 54.5% win rate against the spread."
-        tools={["Python", "pandas", "NumPy", "Scikit-learn", "Matplotlib", "Selenium"]}
+        description="A college football prediction model that successfully predicted games in the 2024 season at a 54.5% win rate against the spread. Current performance can be seen by following the link below."
+        tools={["Python", "pandas", "NumPy", "Scikit-learn", "Matplotlib", "FastAPI"]}
         projectPath="/cfb-model"
         projectLabel="Try the Model"
         githubUrl="https://github.com/blaizerlahman/CFB-Model"

@@ -15,7 +15,7 @@
 			</h1>
 
       <h3 class="text-lg sm:text-xl leading-tight text-zinc-400 -mt-6">
-        Incoming SWE Intern&nbsp;@&nbsp;Dell
+        Incoming SWE&nbsp;@&nbsp;Dell
       </h3>
 
 			<TextBox>
@@ -25,7 +25,7 @@
 				<br>
 				<p>
 					Currently a Computer Science and Data Science major at the University of Wisconsin-Madison focused on expanding my 
-					technical knowledge in full stack development, data science, and cybersecurity.
+					technical knowledge in full stack development, agentic development, and cybersecurity.
 				</p>
 			</TextBox>
 	  </div>
