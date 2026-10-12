@@ -2,18 +2,18 @@
  "season": 2026,
  "season_to_date": {
   "overall": {
-   "wins": 108,
-   "losses": 127,
+   "wins": 133,
+   "losses": 151,
    "pushes": 5,
-   "n": 240,
-   "win_rate": 0.4595744680851064
+   "n": 289,
+   "win_rate": 0.46830985915492956
   },
   "good": {
    "wins": 5,
-   "losses": 6,
+   "losses": 7,
    "pushes": 1,
-   "n": 12,
-   "win_rate": 0.45454545454545453
+   "n": 13,
+   "win_rate": 0.4166666666666667
   },
   "great": {
    "wins": 0,
@@ -31,21 +31,21 @@
   }
  },
  "last_week": {
-  "week": 5,
+  "week": 6,
   "records": {
    "overall": {
-    "wins": 22,
-    "losses": 30,
-    "pushes": 1,
-    "n": 53,
-    "win_rate": 0.4230769230769231
+    "wins": 25,
+    "losses": 24,
+    "pushes": 0,
+    "n": 49,
+    "win_rate": 0.5102040816326531
    },
    "good": {
-    "wins": 1,
-    "losses": 0,
-    "pushes": 1,
-    "n": 2,
-    "win_rate": 1.0
+    "wins": 0,
+    "losses": 1,
+    "pushes": 0,
+    "n": 1,
+    "win_rate": 0.0
    },
    "great": {
     "wins": 0,
@@ -63,5 +63,5 @@
    }
   }
  },
- "generated_at": "2026-10-05T18:14:55.772496+00:00"
+ "generated_at": "2026-10-12T18:53:15.714222+00:00"
 }
