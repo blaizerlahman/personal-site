@@ -2,11 +2,11 @@
  "season": 2026,
  "season_to_date": {
   "overall": {
-   "wins": 158,
-   "losses": 176,
+   "wins": 180,
+   "losses": 201,
    "pushes": 6,
-   "n": 340,
-   "win_rate": 0.47305389221556887
+   "n": 387,
+   "win_rate": 0.47244094488188976
   },
   "good": {
    "wins": 5,
@@ -31,14 +31,14 @@
   }
  },
  "last_week": {
-  "week": 7,
+  "week": 8,
   "records": {
    "overall": {
-    "wins": 25,
+    "wins": 22,
     "losses": 25,
-    "pushes": 1,
-    "n": 51,
-    "win_rate": 0.5
+    "pushes": 0,
+    "n": 47,
+    "win_rate": 0.46808510638297873
    },
    "good": {
     "wins": 0,
@@ -63,5 +63,5 @@
    }
   }
  },
- "generated_at": "2026-10-19T16:23:42.395263+00:00"
+ "generated_at": "2026-10-26T16:04:10.513976+00:00"
 }
